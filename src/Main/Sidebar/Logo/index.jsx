@@ -7,7 +7,6 @@ class Logo extends Component {
 	render() {
 		return (
 			<div styleName='Logo'>
-				<img src='./images/logo.svg' alt='logo'></img>
 			</div>
 		);
 	}
