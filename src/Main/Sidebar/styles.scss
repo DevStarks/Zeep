@@ -1,0 +1,10 @@
+@import "./src/styles/base";
+
+
+:local(.Sidebar) {
+  background-color:$color-background-medium;
+  width: 10rem;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
