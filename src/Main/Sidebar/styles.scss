@@ -3,8 +3,9 @@
 
 :local(.Sidebar) {
   background-color:$color-background-medium;
-  width: 10rem;
+  width: 8rem;
   position: absolute;
   top: 0;
   bottom: 0;
+  padding: 1rem;
 }

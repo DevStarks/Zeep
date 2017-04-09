@@ -7,9 +7,9 @@ import Logo from './Logo';
 class Sidebar extends Component {
 	render() {
 		return (
-			<div styleName='Sidebar'>
+			<aside styleName='Sidebar'>
 				<Logo />
-			</div>
+			</aside>
 		);
 	}
 }
