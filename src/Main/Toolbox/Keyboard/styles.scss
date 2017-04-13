@@ -1,6 +1,13 @@
 @import "./src/styles/base";
+@import "./src/styles/tool";
 
 
 :local(.Keyboard) {
-	background-color: #fff;
+	@extend .tool;
+
+	width: 45rem;
+	height: 20rem;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
 }

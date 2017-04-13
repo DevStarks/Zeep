@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import CSSModules from 'react-css-modules';
 import autobind from 'react-autobind';
+import styles from './styles.scss';
+
+
 
 
 class Key extends Component {
@@ -45,6 +49,7 @@ class Key extends Component {
 	render() {
 		return (
 			<div className={this.props.note + this.activeClass() + this.keyColorClass()}
+					 styleName='Key'
 				 	 onMouseDown={this.setActive}
 					 onMouseUp={this.setInactive}
 					 onDragEnter={this.setActive}
@@ -57,4 +62,4 @@ class Key extends Component {
 }
 
 
-export default Key;
+export default CSSModules(Key, styles);

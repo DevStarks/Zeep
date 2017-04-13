@@ -1,0 +1,19 @@
+@import "./src/styles/base";
+
+
+:local(.Key) {
+  flex: 1;
+
+  &.black {
+    position: absolute;
+    background-color: $color-dark;
+    width: 11%;
+    height: 100%;
+  }
+
+  &.white {
+    height:100%;
+    background-color: $color-white;
+    border: 1px solid $color-background-light;
+  }
+}
