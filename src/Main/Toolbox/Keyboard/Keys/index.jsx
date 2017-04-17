@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import autobind from 'react-autobind';
+
 import CSSModules from 'react-css-modules';
 import styles from './styles.scss';
 
@@ -18,21 +18,37 @@ class Keys extends Component {
   constructor(props) {
     super(props);
 
-    autobind(this);
+    this.renderKeys = this.renderKeys.bind(this);
+    this.renderKey = this.renderKey.bind(this);
+    this.keyNames = this.keyNames.bind(this);
   }
 
+  fullOctave() {
+    return CHR_SCALE;
+  }
+
+  halfOctave() {
+    return CHR_SCALE.slice(0, 5);
+  }
 
   keyNames() {
-    return CHR_SCALE.concat(CHR_SCALE.slice(0, 4)).map((note, idx) => {
-      const octave =  Math.floor(idx / 12) + INITIAL_OCTAVE;
-      return note + String(octave);
-    });
+    return this.fullOctave().concat(this.halfOctave()).map(this.getkeyName);
+  }
+
+  getkeyName(note, idx) {
+    const octave = Math.floor(idx / 12) + INITIAL_OCTAVE;
+    return note + String(octave);
   }
 
   renderKeys() {
-    return this.keyNames().map((note, i) => {
-      return <Key note={note} key={i} synth={this.props.synth} />;
-    });
+    return this.keyNames().map(this.renderKey);
+  }
+
+  renderKey(note, idx) {
+    // octave relative to bottom of keyboard - starts at 1
+    const octave = Math.floor(idx / 12) + 1;
+
+    return <Key note={note} octave={octave} key={idx} synth={this.props.synth} />;
   }
 
 	render() {

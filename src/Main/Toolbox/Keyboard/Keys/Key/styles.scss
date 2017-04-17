@@ -5,15 +5,36 @@
   flex: 1;
 
   &.black {
-    position: absolute;
-    background-color: $color-dark;
-    width: 11%;
-    height: 100%;
+    flex:initial;
+    position:relative;
+
+    div {
+      position: absolute;
+      background-color: #8A8A8A;
+      width: 2.7rem;
+      left: -1.3rem;
+      height: 70%;
+      border: 1px solid $color-background-light;
+    }
+
+    &.active {
+      div {
+        background-color: rgb(173,164,164);
+      }
+    }
   }
 
   &.white {
-    height:100%;
-    background-color: $color-white;
-    border: 1px solid $color-background-light;
+    div {
+      height:100%;
+      background-color: $color-white;
+      border: 1px solid $color-background-light;
+    }
+
+    &.active {
+      div {
+        background-color: rgb(251,242,242);
+      }
+    }
   }
 }
