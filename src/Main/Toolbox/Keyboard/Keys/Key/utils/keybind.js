@@ -25,8 +25,8 @@ const keys = {};
 function keybind(note, trigger, release) {
   const code = KEYMAP[note];
 
-  document.addEventListener('keydown', () => onKeyDown(code, trigger));
-  document.addEventListener('keyup', () => onKeyUp(code, release));
+  document.addEventListener('keydown', e => onKeyDown(code, trigger, e));
+  document.addEventListener('keyup', e => onKeyUp(code, release, e));
 }
 
 function onKeyDown(code, cb, e) {

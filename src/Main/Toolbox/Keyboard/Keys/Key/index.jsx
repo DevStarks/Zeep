@@ -5,7 +5,6 @@ import keybind from './utils/keybind';
 import _ from 'lodash';
 
 
-
 class Key extends Component {
 	static propTypes = {
     synth: React.PropTypes.object.isRequired,
