@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './styles.scss';
+import keybind from './utils/keybind';
+import _ from 'lodash';
+
 
 
 class Key extends Component {
@@ -24,6 +27,11 @@ class Key extends Component {
 		this.setActive = this.setActive.bind(this);
 		this.playNote = this.playNote.bind(this);
 		this.stopNote = this.stopNote.bind(this);
+		this.relativeNote = this.relativeNote.bind(this);
+	}
+
+	componentDidMount() {
+		keybind(this.relativeNote(), this.setActive, this.setInactive);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -40,6 +48,10 @@ class Key extends Component {
 
 	stopNote() {
 		this.props.synth.triggerRelease(this.props.note);
+	}
+
+	relativeNote() {
+		return this.props.note.slice(0, -1) + this.props.octave;
 	}
 
 	isBlack(note) {

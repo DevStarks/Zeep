@@ -8,7 +8,7 @@ import Keys from './keys';
 
 class Keyboard extends Component {
 	state = {
-		synth: new Tone.PolySynth().toMaster()
+		synth: new Tone.PolySynth(6).toMaster()
 	}
 
 	render() {
