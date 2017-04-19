@@ -4,6 +4,7 @@ import styles from './styles.scss';
 import Tone from 'tone';
 
 import Keys from './keys';
+import Logo from './logo';
 
 
 class Keyboard extends Component {
@@ -14,6 +15,7 @@ class Keyboard extends Component {
 	render() {
 		return (
 			<div styleName='Keyboard'>
+				<Logo />
 				<Keys synth={this.state.synth} />
 			</div>
 		);
