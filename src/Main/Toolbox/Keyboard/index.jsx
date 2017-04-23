@@ -3,8 +3,9 @@ import CSSModules from 'react-css-modules';
 import styles from './styles.scss';
 import Tone from 'tone';
 
-import Keys from './keys';
-import Logo from './logo';
+import Keys from './Keys';
+import Panel from './Panel';
+
 
 
 class Keyboard extends Component {
@@ -15,9 +16,7 @@ class Keyboard extends Component {
 	render() {
 		return (
 			<div styleName='Keyboard'>
-				<div className='keyboard-panel'>
-					<Logo />
-				</div>
+				<Panel />
 				<Keys synth={this.state.synth} />
 			</div>
 		);

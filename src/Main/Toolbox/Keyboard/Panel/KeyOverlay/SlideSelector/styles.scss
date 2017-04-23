@@ -1,0 +1,17 @@
+@import "./src/styles/base";
+
+:local(.SlideSelector) {
+	width: 100%;
+	height: 100%;
+
+	.slider {
+		width: 1rem;
+	}
+
+	.sliderBall {
+		width: 100%;
+		height: auto;
+		border-radius: 50%;
+		background-color: $color-dark;
+	}
+}
