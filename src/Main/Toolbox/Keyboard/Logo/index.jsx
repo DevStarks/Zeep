@@ -13,5 +13,4 @@ function Logo() {
 	);
 }
 
-
 export default CSSModules(Logo, styles);

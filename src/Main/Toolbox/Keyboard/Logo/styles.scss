@@ -1,5 +1,14 @@
 @import "./src/styles/base";
 
 :local(.Logo) {
-  background-color: #fff;
+  height: 100%;
+  width: 10rem;
+
+  div {
+    height: inherit;
+  }
+
+  svg {
+    height: 100%;
+  }
 }

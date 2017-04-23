@@ -15,7 +15,9 @@ class Keyboard extends Component {
 	render() {
 		return (
 			<div styleName='Keyboard'>
-				<Logo />
+				<div className='keyboard-panel'>
+					<Logo />
+				</div>
 				<Keys synth={this.state.synth} />
 			</div>
 		);

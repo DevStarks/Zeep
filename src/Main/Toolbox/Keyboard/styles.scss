@@ -5,9 +5,15 @@
 :local(.Keyboard) {
 	@extend .tool;
 
-	width: 45rem;
+	width: 40rem;
 	height: 20rem;
 	margin: 0 auto;
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
+
+	.keyboard-panel {
+		flex: 1;
+		margin-bottom: 2rem;
+	}
 }
