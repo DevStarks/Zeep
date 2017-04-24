@@ -6,11 +6,7 @@ import styles from './styles.scss';
 import logo from "./images/logo.svg";
 
 function Logo() {
-	return (
-		<div styleName='Logo'>
-			<div dangerouslySetInnerHTML={{__html: logo}} />
-		</div>
-	);
+	return <div styleName='Logo' dangerouslySetInnerHTML={{__html: logo}} />;
 }
 
 export default CSSModules(Logo, styles);

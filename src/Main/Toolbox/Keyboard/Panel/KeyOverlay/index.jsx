@@ -5,23 +5,24 @@ import styles from './styles.scss';
 import SlideSelector from './SlideSelector';
 
 class KeyOverlay extends Component {
-	formatSliderOptions() {
-		
+	sliderOptions() {
+		return {
+			1: 'boethian',
+			2: 'qwerty',
+			3: 'none'
+		}
+	}
+
+	onChange() {
+
 	}
 
 	render() {
 		return (
 			<div styleName='KeyOverlay'>
 				<label>overlay</label>
-				<div>
-					<SlideSelector options={this.formatSliderOptions()}/>
 
-					<ul>
-						<li>boethian</li>
-						<li>qwerty</li>
-						<li>none</li>
-					</ul>
-				</div>
+				<SlideSelector options={this.sliderOptions()} default={3} onChange={this.onChange} />
 			</div>
 		);
 	}

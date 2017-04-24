@@ -10,29 +10,49 @@ class SlideSelector extends Component {
 		this.renderOptions = this.renderOptions.bind(this);
 		this.renderOption = this.renderOption.bind(this);
 		this.optionClass = this.optionClass.bind(this);
+		this.optionClass = this.optionClass.bind(this);
+
+		this.state = {
+			selected: this.props.default || 1
+		}
+	}
+
+	componentDidMount() {
+		this.initDraggable.call(this);
 	}
 
 	initDraggable() {
-		var element = this.refs.sliderBall;
+		var element = this.sliderBall;
 		var options = {
-			limit: this.refs.slider,
+			limit: this.slider,
+			grid: this.props.options.count,
 			onDrag: this.onDrag
 		};
 
-		new Draggable (element, options);
+		new Draggable(element, options);
+	}
+
+	getClosestOption(x, y) {
+		
 	}
 
 	onDrag(x, y) {
-		
+		const selected = this.getClosestOption(x, y);
+
+		this.props.onChange(selected);
+
+		this.setState({
+			selected: selected
+		})
 	}
 
 	optionClass(optionId) {
 		return this.props.selected === optionId ? 'selected' : '';
 	}
 
-	renderOption(optionId) {
+	renderOption(optionId, idx) {
 		return (
-			<li className={this.optionClass(optionId)}>
+			<li className={this.optionClass(optionId)} key={idx}>
 				{this.props.options[optionId]}
 			</li>
 		);
@@ -44,15 +64,23 @@ class SlideSelector extends Component {
 
 	render() {
 		return (
-			<div styleName='SlideSelector'>
+			<div className='slideselector' styleName='SlideSelector'>
 				<div className='slider' ref={ slider => { this.slider = slider }}>
 					<div className='sliderBall' ref={ sliderBall => { this.sliderBall = sliderBall }}/>
 				</div>
 
-				{this.renderOptions()}
+				<ul>
+					{this.renderOptions()}
+				</ul>
 			</div>
 		);
 	}
+}
+
+SlideSelector.propTypes = {
+	options: React.PropTypes.object.isRequired,
+	onChange: React.PropTypes.func.isRequired,
+	default: React.PropTypes.number
 }
 
 
