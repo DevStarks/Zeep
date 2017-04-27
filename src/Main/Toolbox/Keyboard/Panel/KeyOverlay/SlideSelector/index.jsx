@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './styles.scss';
 import Draggable from 'draggable';
+import _ from 'lodash';
 
 class SlideSelector extends Component {
 	constructor(props) {
@@ -11,6 +12,7 @@ class SlideSelector extends Component {
 		this.renderOption = this.renderOption.bind(this);
 		this.optionClass = this.optionClass.bind(this);
 		this.optionClass = this.optionClass.bind(this);
+		this.onDrag = this.onDrag.bind(this);
 
 		this.state = {
 			selected: this.props.default || 1
@@ -33,10 +35,28 @@ class SlideSelector extends Component {
 	}
 
 	getClosestOption(x, y) {
-		
+		const locations =  this.getOptionLocations();
+		let closestIdx = 0;
+
+		locations.forEach((location, idx) => {
+			let diff = Math.abs(location - y);
+			let closestOptionDiff = locations[closestIdx] - y;
+
+			if(diff < closestOptionDiff){
+				closestIdx = idx;
+			}
+		})
+
+		return this['option' + closestIdx];
 	}
 
-	onDrag(x, y) {
+	getOptionLocations() {
+		const optionsCount = this.props.options.count;
+		// returns the y offsets of all options
+		return _.times(optionsCount, i => this['option' + i].offsetTop);
+	}
+
+	onDrag(el, x, y) {
 		const selected = this.getClosestOption(x, y);
 
 		this.props.onChange(selected);
@@ -47,12 +67,12 @@ class SlideSelector extends Component {
 	}
 
 	optionClass(optionId) {
-		return this.props.selected === optionId ? 'selected' : '';
+		return this.state.selected === optionId ? 'selected' : '';
 	}
 
 	renderOption(optionId, idx) {
 		return (
-			<li className={this.optionClass(optionId)} key={idx}>
+			<li className={this.optionClass(optionId)} key={idx} ref={ option => { this['option' + idx] = option }}>
 				{this.props.options[optionId]}
 			</li>
 		);
