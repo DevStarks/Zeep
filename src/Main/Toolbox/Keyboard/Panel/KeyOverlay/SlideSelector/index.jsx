@@ -14,8 +14,8 @@ class SlideSelector extends Component {
 		this.renderOption = this.renderOption.bind(this);
 		this.optionClass = this.optionClass.bind(this);
 		this.optionClass = this.optionClass.bind(this);
-		this.onDrag = this.onDrag.bind(this);
-		this.onDragStop = this.onDragStop.bind(this);
+		this.selectClosestOption = this.selectClosestOption.bind(this);
+		this.snapToClosest = this.snapToClosest.bind(this);
 
 		this.state = {
 			selected: this.props.default || 1
@@ -27,22 +27,31 @@ class SlideSelector extends Component {
 	}
 
 	initDraggable() {
-		var $element = $(this.sliderBall);
-
-		$element.draggable({
+		$(this.sliderBall).draggable({
 			axis: "y",
 			containment: "parent",
-			stop: this.onDragStop
+			stop: this.snapToClosest,
+			drag: this.selectClosestOption
 		})
+
+		const originalSliderBallData = {
+			position: {
+				top: this.sliderBall.offsetTop,
+				left: this.sliderBall.offsetLeft
+			}
+		}
+
+		this.selectClosestOption(null, originalSliderBallData);
+		this.snapToClosest(null, originalSliderBallData);
 	}
 
-	onDragStop(event, { position: { left, top } }) {
+	snapToClosest(event, { position: { left, top } }) {
 		//
 		// use this.slider.offsetTop to get difference in offset between
 		// slider options and sliderBall
 		//
-		const $sliderBall = $(event.target);
-		const $closest = $(this.getClosestOption(left, top + this.slider.offsetTop))
+		const $sliderBall = $(this.sliderBall);
+		const $closest = $(this.getClosestOption(left, top))
 		const closestY = $closest.position().top - this.slider.offsetTop;
 
   	$sliderBall.stop().animate({
@@ -57,6 +66,8 @@ class SlideSelector extends Component {
 		locations.forEach((location, idx) => {
 			const diff = Math.abs(location - y);
 			const closestOptionDiff = Math.abs(locations[closestIdx] - y);
+
+			y += this.slider.offsetTop
 
 			if(diff < closestOptionDiff){
 				closestIdx = idx;
@@ -73,8 +84,9 @@ class SlideSelector extends Component {
 		return _.times(optionsCount, i => this['option' + i].offsetTop);
 	}
 
-	onDrag(el, x, y) {
-		const selected = this.getClosestOption(x, y);
+	selectClosestOption(event, { position: { left, top } }) {
+		const closestOption = this.getClosestOption(left, top);
+		const selected = closestOption.dataset.id;
 
 		this.props.onChange(selected);
 
@@ -91,6 +103,7 @@ class SlideSelector extends Component {
 		return (
 			<li className={'slide-option ' + this.optionClass(optionId)}
 					key={idx}
+					data-id={optionId}
 					ref={ option => { this['option' + idx] = option }}>
 				{this.props.options[optionId]}
 			</li>

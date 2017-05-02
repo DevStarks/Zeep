@@ -26,9 +26,15 @@
 
 	li {
 		margin-bottom: .5rem;
+		opacity: .35;
+		@include transition(opacity .5s);
 
 		&:last-of-type {
 			margin-bottom:0;
+		}
+
+		&.selected {
+			opacity: 1;
 		}
 	}
 }
