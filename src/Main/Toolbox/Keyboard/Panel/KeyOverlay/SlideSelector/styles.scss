@@ -2,6 +2,7 @@
 
 :local(.SlideSelector) {
 	display: flex;
+	position: relative;
 
 	.slider {
 		position: relative;
@@ -9,7 +10,7 @@
 		background: white;
 		border-radius: 10px;
 		margin-right: .5rem;
-		padding: 3px;
+		padding: 6px 3px;
 	}
 
 	.sliderBall {
@@ -17,6 +18,10 @@
 	  height: .8rem;
 		border-radius: 50%;
 		background-color: $color-dark;
+	}
+
+	ul {
+		padding: 5px 0;
 	}
 
 	li {

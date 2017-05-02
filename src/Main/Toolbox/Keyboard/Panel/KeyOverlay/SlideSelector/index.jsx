@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './styles.scss';
-import Draggable from 'draggable';
+import $ from 'jquery';
+import 'jquery-ui-bundle';
+
 import _ from 'lodash';
 
 class SlideSelector extends Component {
@@ -13,6 +15,7 @@ class SlideSelector extends Component {
 		this.optionClass = this.optionClass.bind(this);
 		this.optionClass = this.optionClass.bind(this);
 		this.onDrag = this.onDrag.bind(this);
+		this.onDragStop = this.onDragStop.bind(this);
 
 		this.state = {
 			selected: this.props.default || 1
@@ -24,23 +27,36 @@ class SlideSelector extends Component {
 	}
 
 	initDraggable() {
-		var element = this.sliderBall;
-		var options = {
-			limit: this.slider,
-			grid: this.props.options.count,
-			onDrag: this.onDrag
-		};
+		var $element = $(this.sliderBall);
 
-		new Draggable(element, options);
+		$element.draggable({
+			axis: "y",
+			containment: "parent",
+			stop: this.onDragStop
+		})
+	}
+
+	onDragStop(event, { position: { left, top } }) {
+		//
+		// use this.slider.offsetTop to get difference in offset between
+		// slider options and sliderBall
+		//
+		const $sliderBall = $(event.target);
+		const $closest = $(this.getClosestOption(left, top + this.slider.offsetTop))
+		const closestY = $closest.position().top - this.slider.offsetTop;
+
+  	$sliderBall.stop().animate({
+      top: closestY
+  	}, 500,'easeOutCirc');
 	}
 
 	getClosestOption(x, y) {
-		const locations =  this.getOptionLocations();
+		const locations = this.getOptionLocations();
 		let closestIdx = 0;
 
 		locations.forEach((location, idx) => {
-			let diff = Math.abs(location - y);
-			let closestOptionDiff = locations[closestIdx] - y;
+			const diff = Math.abs(location - y);
+			const closestOptionDiff = Math.abs(locations[closestIdx] - y);
 
 			if(diff < closestOptionDiff){
 				closestIdx = idx;
@@ -51,7 +67,8 @@ class SlideSelector extends Component {
 	}
 
 	getOptionLocations() {
-		const optionsCount = this.props.options.count;
+		const optionsCount = Object.keys(this.props.options).length;
+
 		// returns the y offsets of all options
 		return _.times(optionsCount, i => this['option' + i].offsetTop);
 	}
@@ -72,7 +89,9 @@ class SlideSelector extends Component {
 
 	renderOption(optionId, idx) {
 		return (
-			<li className={this.optionClass(optionId)} key={idx} ref={ option => { this['option' + idx] = option }}>
+			<li className={'slide-option ' + this.optionClass(optionId)}
+					key={idx}
+					ref={ option => { this['option' + idx] = option }}>
 				{this.props.options[optionId]}
 			</li>
 		);

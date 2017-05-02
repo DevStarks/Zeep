@@ -7,8 +7,8 @@ import SlideSelector from './SlideSelector';
 class KeyOverlay extends Component {
 	sliderOptions() {
 		return {
-			1: 'boethian',
-			2: 'qwerty',
+			1: 'qwerty',
+			2: 'boethian',
 			3: 'none'
 		}
 	}
