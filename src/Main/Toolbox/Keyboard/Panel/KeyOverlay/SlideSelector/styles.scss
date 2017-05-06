@@ -16,12 +16,13 @@
 	.sliderBall {
 		width: .8rem;
 	  height: .8rem;
-		border-radius: 50%;
+		border-radius: 60%;
 		background-color: $color-dark;
-	}
+		cursor: grab;
 
-	ul {
-		padding: 5px 0;
+		&:active {
+			cursor: grabbing;
+		}
 	}
 
 	li {
