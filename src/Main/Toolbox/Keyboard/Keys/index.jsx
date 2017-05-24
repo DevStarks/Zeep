@@ -12,7 +12,8 @@ const CHR_SCALE = ["C", "C#", "D", "D#", "E", "F",
 
 class Keys extends Component {
   static propTypes = {
-    synth: React.PropTypes.object.isRequired
+    synth: React.PropTypes.object.isRequired,
+    overlay: React.PropTypes.oneOf(['qwerty', 'boethian', 'none']).isRequired
   }
 
   constructor(props) {
@@ -48,7 +49,7 @@ class Keys extends Component {
     // octave relative to bottom of keyboard - starts at 1
     const octave = Math.floor(idx / 12) + 1;
 
-    return <Key note={note} octave={octave} key={idx} synth={this.props.synth} />;
+    return <Key note={note} octave={octave} key={idx} overlay={this.props.overlay} synth={this.props.synth} />;
   }
 
 	render() {

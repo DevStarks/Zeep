@@ -20,13 +20,21 @@ const KEYMAP = {
   'F2':  222,
 };
 
+// keeps track of which keys are active
 const keys = {};
 
-function keybind(note, trigger, release) {
+export function keybind(note, trigger, release) {
   const code = KEYMAP[note];
 
   document.addEventListener('keydown', e => onKeyDown(code, trigger, e));
   document.addEventListener('keyup', e => onKeyUp(code, release, e));
+}
+
+export function getKeyboardKey(note){
+  // keycode exceptions
+  if(note === 'E2'){ return ';'}
+
+  return String.fromCharCode(KEYMAP[note]);
 }
 
 function onKeyDown(code, cb, e) {

@@ -22,6 +22,10 @@
         background-color: rgb(173,164,164);
       }
     }
+
+    .key-overlay {
+      color: $color-white;
+    }
   }
 
   &.white {
@@ -36,5 +40,15 @@
         background-color: rgb(251,242,242);
       }
     }
+  }
+
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .key-overlay {
+    margin-bottom: 1rem;
   }
 }

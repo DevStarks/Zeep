@@ -6,18 +6,19 @@ import Tone from 'tone';
 import Keys from './Keys';
 import Panel from './Panel';
 
-
+const DEFAULT_OVERLAY = 'qwerty';
 
 class Keyboard extends Component {
 	state = {
-		synth: new Tone.PolySynth(6).toMaster()
+		synth: new Tone.PolySynth(6).toMaster(),
+		overlay: DEFAULT_OVERLAY
 	}
 
 	render() {
 		return (
 			<div styleName='Keyboard'>
-				<Panel />
-				<Keys synth={this.state.synth} />
+				<Panel overlay={this.state.overlay} />
+				<Keys synth={this.state.synth} overlay={this.state.overlay} />
 			</div>
 		);
 	}

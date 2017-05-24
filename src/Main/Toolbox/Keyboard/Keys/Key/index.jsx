@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './styles.scss';
-import keybind from './utils/keybind';
+import { keybind, getKeyboardKey } from './utils/keybind';
 import _ from 'lodash';
-
 
 class Key extends Component {
 	static propTypes = {
     synth: React.PropTypes.object.isRequired,
-    note: React.PropTypes.string.isRequired
+    note: React.PropTypes.string.isRequired,
+		overlay: React.PropTypes.oneOf(['qwerty', 'boethian', 'none'])
   }
 
 	state = {
@@ -49,8 +49,12 @@ class Key extends Component {
 		this.props.synth.triggerRelease(this.props.note);
 	}
 
+	noteName() {
+		return this.props.note.slice(0, -1);
+	}
+
 	relativeNote() {
-		return this.props.note.slice(0, -1) + this.props.octave;
+		return this.noteName() + this.props.octave;
 	}
 
 	isBlack(note) {
@@ -62,7 +66,7 @@ class Key extends Component {
 	}
 
 	activeClass() {
-		return this.state.active ? ' active' : '';
+		return this.state.active ? 'active' : '';
 	}
 
 	setActive() {
@@ -73,6 +77,25 @@ class Key extends Component {
 		this.setState({ active: false });
 	}
 
+	renderOverlay() {
+		var overlayContent;
+		switch (this.props.overlay) {
+			case 'none':
+				overlayContent = null;
+				break;
+			case 'qwerty':
+				overlayContent = getKeyboardKey(this.relativeNote());
+				break;
+			case 'boethian':
+				overlayContent = this.noteName();
+				break;
+			default:
+				throw new Error('invalid overlay type:' + this.props.overlay);
+		}
+
+		return <span className='key-overlay'>{overlayContent}</span>;
+	}
+
 	render() {
 		return (
 			<div styleName='Key' className={this.activeClass() + this.keyColorClass()}>
@@ -80,7 +103,9 @@ class Key extends Component {
 						 onMouseUp={this.setInactive}
 						 onDragEnter={this.setActive}
 						 onDragExit={this.setInactive}
-						 onDoubleClick={this.setActive}/>
+						 onDoubleClick={this.setActive}>
+					{this.renderOverlay()}
+				</div>
 			</div>
 		);
 	}
