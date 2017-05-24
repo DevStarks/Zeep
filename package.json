@@ -64,6 +64,7 @@
     "react-addons-test-utils": "15.4.2",
     "react-autobind": "^1.0.6",
     "react-dev-utils": "^0.5.2",
+    "redux-devtools": "^3.4.0",
     "sass-loader": "^3.2.3",
     "sinon": "^2.1.0",
     "style-loader": "^0.13.2",
@@ -81,6 +82,8 @@
     "react": "^15.4.2",
     "react-css-modules": "^4.1.0",
     "react-dom": "15.4.2",
+    "react-redux": "^5.0.5",
+    "redux": "^3.6.0",
     "relative-path": "^1.1.0"
   },
   "babel": {
