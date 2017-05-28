@@ -34,34 +34,25 @@ class SlideSelector extends Component {
 			drag: this.selectClosestOption
 		})
 
-		const originalSliderBallData = {
-			position: {
-				top: this.sliderBall.offsetTop,
-				left: this.sliderBall.offsetLeft
-			}
-		}
-
-		this.selectClosestOption(null, originalSliderBallData);
-		this.snapToClosest(null, originalSliderBallData);
+		this.setDefaultPosition()
 	}
 
 	snapToClosest(event, { position: { left, top } }) {
+		const $closest = $(this.getClosestOption(left, top));
+		this.snapToOption($closest);
+	}
+
+	setDefaultPosition() {
+		const $defaultOption = $(this['option' + this.props.default]);
+		this.snapToOption($defaultOption);
+	}
+
+	snapToOption($option){
 		//
 		// use this.slider.offsetTop to get difference in offset between
 		// slider options and sliderBall
 		//
-		const $sliderBall = $(this.sliderBall);
-		const $closest = $(this.getClosestOption(left, top))
-		this.snapToOption()
-		const closestY = $closest.position().top - this.slider.offsetTop;
-
-  	$sliderBall.stop().animate({
-      top: closestY
-  	}, 500,'easeOutCirc');
-	}
-
-	snapToOption(option){
-		const y = option.position().top - this.slider.offsetTop;
+		const y = $option.position().top - this.slider.offsetTop;
 		const $sliderBall = $(this.sliderBall);
 
   	$sliderBall.stop().animate({
@@ -71,27 +62,33 @@ class SlideSelector extends Component {
 
 	getClosestOption(x, y) {
 		const locations = this.getOptionLocations();
-		let closestIdx = 0;
+		let closestOptId = null;
 
-		locations.forEach((location, idx) => {
+		Object.keys(locations).forEach( optionId => {
+			const location = locations[optionId];
 			const diff = Math.abs(location - y);
-			const closestOptionDiff = Math.abs(locations[closestIdx] - y);
+			const closestOptionDiff = Math.abs(locations[closestOptId] - y);
 
-			y += this.slider.offsetTop
+			y += this.slider.offsetTop;
 
-			if(diff < closestOptionDiff){
-				closestIdx = idx;
+			if (diff < closestOptionDiff || !closestOptId){
+				closestOptId = optionId;
 			}
 		})
 
-		return this['option' + closestIdx];
+		return this['option' + closestOptId];
 	}
 
 	getOptionLocations() {
-		const optionsCount = Object.keys(this.props.options).length;
+		const locations = {}
+		// location object maps y offset of option to the option id
 
-		// returns the y offsets of all options
-		return _.times(optionsCount, i => this['option' + i].offsetTop);
+		Object.keys(this.props.options).forEach((optionId) => {
+			const location =  this['option' + optionId].offsetTop
+			locations[optionId] = location
+		})
+
+		return locations;
 	}
 
 	selectClosestOption(event, { position: { left, top } }) {
@@ -109,12 +106,12 @@ class SlideSelector extends Component {
 		return this.state.selected === optionId ? 'selected' : '';
 	}
 
-	renderOption(optionId, idx) {
+	renderOption(optionId) {
 		return (
 			<li className={'slide-option ' + this.optionClass(optionId)}
-					key={idx}
+					key={optionId}
 					data-id={optionId}
-					ref={ option => { this['option' + idx] = option }}>
+					ref={ option => { this['option' + optionId] = option }}>
 				{this.props.options[optionId]}
 			</li>
 		);
