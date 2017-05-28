@@ -52,10 +52,20 @@ class SlideSelector extends Component {
 		//
 		const $sliderBall = $(this.sliderBall);
 		const $closest = $(this.getClosestOption(left, top))
+		this.snapToOption()
 		const closestY = $closest.position().top - this.slider.offsetTop;
 
   	$sliderBall.stop().animate({
       top: closestY
+  	}, 500,'easeOutCirc');
+	}
+
+	snapToOption(option){
+		const y = option.position().top - this.slider.offsetTop;
+		const $sliderBall = $(this.sliderBall);
+
+  	$sliderBall.stop().animate({
+      top: y
   	}, 500,'easeOutCirc');
 	}
 
