@@ -4,6 +4,7 @@ import styles from './styles.scss';
 
 import Logo from './logo';
 import KeyOverlay from './KeyOverlay';
+import Frequency from './Frequency';
 
 class Panel extends Component {
 	render() {
@@ -11,6 +12,7 @@ class Panel extends Component {
 			<div styleName='Panel'>
 				<Logo />
 				<KeyOverlay />
+				<Frequency />
 			</div>
 		);
 	}

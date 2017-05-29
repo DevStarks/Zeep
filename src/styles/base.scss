@@ -1,6 +1,9 @@
 @import "./src/styles/colors";
 @import "./src/styles/mixins";
 
+@import "./src/styles/modules/tool";
+@import "./src/styles/modules/panelcontrol";
+
 $body-font-size:15px;
 $container-width: 1024px;
 

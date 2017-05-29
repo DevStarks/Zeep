@@ -1,0 +1,23 @@
+@import "./src/styles/colors";
+
+.panelcontrol {
+  background-color: inherit;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    padding: .2rem 2rem;
+    background-color: $color-dark;
+    color: $color-white;
+    display: block;
+    border-radius: 18px;
+    margin-bottom: .5rem;
+  }
+
+  & > div {
+    background-color: $color-background-medium;
+    padding: .5rem;
+    border-radius: 13px;
+    flex: 1;
+  }
+}

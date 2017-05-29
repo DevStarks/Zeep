@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import CSSModules from 'react-css-modules';
 import { actions } from '../../../Keyboard/reducer'
-import styles from './styles.scss';
 
 import SlideSelector from './SlideSelector';
 
@@ -26,10 +24,12 @@ class KeyOverlay extends Component {
 
 	render() {
 		return (
-			<div styleName='KeyOverlay'>
+			<div className='panelcontrol'>
 				<label>overlay</label>
 
-				<SlideSelector options={SLIDER_OPTIONS} default={3} onChange={this.onChange} />
+				<div>
+					<SlideSelector options={SLIDER_OPTIONS} default={3} onChange={this.onChange} />
+				</div>
 			</div>
 		);
 	}
@@ -49,4 +49,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CSSModules(KeyOverlay, styles))
+)(KeyOverlay)
