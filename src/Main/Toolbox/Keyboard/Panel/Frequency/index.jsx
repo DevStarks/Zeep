@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { actions } from '../../../Keyboard/reducer'
 
 import Adjuster from '../components/adjuster'
 
@@ -10,11 +12,26 @@ class Frequency extends Component {
 				<label>frequency</label>
 
 				<div>
-					<Adjuster />
+					<Adjuster value={this.props.frequency}
+										onIncrement={this.props.incrementFreq}
+										onDecrement={this.props.decrementFreq} />
 				</div>
 			</div>
 		);
 	}
 }
 
-export default Frequency
+// Frequency container
+
+const mapStateToProps = ({ frequency }) => {
+	return { frequency }
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators(actions, dispatch)
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Frequency)

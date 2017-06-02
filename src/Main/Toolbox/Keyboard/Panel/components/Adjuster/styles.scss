@@ -1,3 +1,32 @@
+@import "./src/styles/base";
+
 :local(.Adjuster) {
-  display: inherit;
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  .display {
+    background-color: $color-white;
+    padding: 12px 10px;
+    border-radius: $border-radius;
+    margin-right: .5rem;
+  }
+
+  .buttons {
+    display: flex;
+    flex: 1;
+
+    div {
+      flex: 1;
+      background-color: $color-background-medium;
+      border: 1px solid $color-dark;
+      text-align: center;
+      border-radius: 6px;
+      font-weight: 900;
+
+      &:first-of-type {
+        margin-right: .25rem;
+      }
+    }
+  }
 }
