@@ -11,15 +11,11 @@ import Panel from './Panel';
 // Keyboard component
 
 class Keyboard extends Component {
-	state = {
-		synth: new Tone.PolySynth(6).toMaster()
-	}
-
 	render() {
 		return (
 			<div styleName='Keyboard'>
 				<Panel overlay={this.props.overlay} />
-				<Keys synth={this.state.synth} overlay={this.props.overlay} />
+				<Keys synth={this.props.synth} overlay={this.props.overlay} />
 			</div>
 		);
 	}
@@ -28,8 +24,8 @@ class Keyboard extends Component {
 
 // Keyboard container
 
-const mapStateToProps = ({ overlay }) => {
-	return { overlay }
+const mapStateToProps = ({ overlay, synth }) => {
+	return { overlay, synth }
 }
 
 export default connect(
