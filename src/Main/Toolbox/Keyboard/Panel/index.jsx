@@ -5,6 +5,7 @@ import styles from './styles.scss';
 import Logo from './logo';
 import KeyOverlay from './KeyOverlay';
 import Frequency from './Frequency';
+import Transpose from './Transpose';
 
 class Panel extends Component {
 	render() {
@@ -13,6 +14,7 @@ class Panel extends Component {
 				<Logo />
 				<KeyOverlay />
 				<Frequency />
+				<Transpose />
 			</div>
 		);
 	}
