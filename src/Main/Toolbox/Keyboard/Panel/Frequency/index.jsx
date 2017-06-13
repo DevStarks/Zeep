@@ -23,13 +23,9 @@ class Frequency extends Component {
 
 // Frequency container
 
-const mapStateToProps = ({ frequency }) => {
-	return { frequency }
-}
+const mapStateToProps = ({ frequency }) => ({ frequency })
 
-const mapDispatchToProps = (dispatch) => {
-	return bindActionCreators(actions, dispatch)
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 
 export default connect(
   mapStateToProps,

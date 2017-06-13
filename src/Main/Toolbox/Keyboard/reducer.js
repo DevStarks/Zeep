@@ -11,7 +11,7 @@ export const types = {
 export const initialState = {
   overlay: 'none',
   frequency: 440,
-  key: 'C',
+  transposition: 'C',
   synth: new Tone.PolySynth(6).toMaster()
 }
 
@@ -28,10 +28,10 @@ export default (state = initialState, action) => {
     case types.INCREMENT_KEY:
 
       // use tone.pitchShift
-      return { ...state, key: state.key + 1 }
+      return { ...state, transposition: state.transposition + 1 }
     case types.DECREMENT_KEY:
 
-      return { ...state, key:  state.key - 1 }
+      return { ...state, transposition:  state.transposition - 1 }
     default:
       return state
   }

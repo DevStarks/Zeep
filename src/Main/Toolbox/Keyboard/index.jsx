@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import CSSModules from 'react-css-modules';
 import styles from './styles.scss';
-import Tone from 'tone';
 
 import Keys from './Keys';
 import Panel from './Panel';
@@ -24,9 +23,7 @@ class Keyboard extends Component {
 
 // Keyboard container
 
-const mapStateToProps = ({ overlay, synth }) => {
-	return { overlay, synth }
-}
+const mapStateToProps = ({ overlay, synth }) => ({ overlay, synth })
 
 export default connect(
   mapStateToProps,

@@ -1,35 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actions } from '../../../Keyboard/reducer'
 
 import Adjuster from '../components/adjuster'
 
-class Transpose extends Component {
-	render() {
-		return (
-			<div className='panelcontrol'>
-				<label>transpose</label>
+const Transpose = function({ transposition, incrementKey, decrementKey }) {
+	return (
+		<div className='panelcontrol'>
+			<label>transpose</label>
 
-				<div>
-					<Adjuster value={this.props.key}
-										onIncrement={this.props.incrementKey}
-										onDecrement={this.props.decrementKey} />
-				</div>
+			<div>
+				<Adjuster value={transposition}
+									onIncrement={incrementKey}
+									onDecrement={decrementKey} />
 			</div>
-		);
-	}
-}
+		</div>
+	);
+};
 
 // Transpose container
 
-const mapStateToProps = ({ key }) => {
-	return { key }
-}
+const mapStateToProps = ({ transposition }) => ({ transposition })
 
-const mapDispatchToProps = (dispatch) => {
-	return bindActionCreators(actions, dispatch)
-}
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
 export default connect(
   mapStateToProps,

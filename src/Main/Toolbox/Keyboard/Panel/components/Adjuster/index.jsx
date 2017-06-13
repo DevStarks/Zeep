@@ -20,7 +20,7 @@ class Adjuster extends Component {
 Adjuster.propTypes = {
 	onIncrement: React.PropTypes.func.isRequired,
 	onDecrement: React.PropTypes.func.isRequired,
-	value: React.PropTypes.string.isRequired
+	value: React.PropTypes.node.isRequired
 }
 
 
