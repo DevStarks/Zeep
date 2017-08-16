@@ -5,13 +5,25 @@ import { actions } from '../../../Keyboard/reducer'
 
 import Adjuster from '../components/adjuster'
 
-const Transpose = function({ transposition, incrementKey, decrementKey }) {
+const CHR_SCALE = ["C", "C#", "D", "D#", "E", "F",
+                   "F#", "G", "G#", "A", "A#", "B"];
+
+
+const getPitchFromOffset = (offset) => {
+	let idx = offset;
+	while(idx < 0){ idx += CHR_SCALE.length; }
+	idx %= 12;
+
+	return CHR_SCALE[idx];
+}
+
+const Transpose = function({ pitchOffset, incrementKey, decrementKey }) {
 	return (
 		<div className='panelcontrol'>
 			<label>transpose</label>
 
 			<div>
-				<Adjuster value={transposition}
+				<Adjuster value={getPitchFromOffset(pitchOffset)}
 									onIncrement={incrementKey}
 									onDecrement={decrementKey} />
 			</div>
@@ -21,7 +33,7 @@ const Transpose = function({ transposition, incrementKey, decrementKey }) {
 
 // Transpose container
 
-const mapStateToProps = ({ transposition }) => ({ transposition })
+const mapStateToProps = ({ pitchOffset }) => ({ pitchOffset })
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
