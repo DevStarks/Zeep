@@ -1,6 +1,6 @@
 import Tone from 'tone';
 
-export const types = {
+const types = {
   SET_OVERLAY: 'KEYBOARD/SET_OVERLAY',
   INCREMENT_FREQ: 'KEYBOARD/INCREMENT_FREQ',
   DECREMENT_FREQ: 'KEYBOARD/DECREMENT_FREQ',
@@ -10,7 +10,7 @@ export const types = {
 
 const pitchShift = new Tone.PitchShift().toMaster();
 
-export const initialState = {
+const initialState = {
   overlay: 'none',
   frequency: 440,
   pitchOffset: pitchShift.pitch,

@@ -23,7 +23,7 @@ class Frequency extends Component {
 
 // Frequency container
 
-const mapStateToProps = ({ frequency }) => ({ frequency })
+const mapStateToProps = ({ keyboard: { frequency } }) => ({ frequency })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 

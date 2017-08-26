@@ -23,7 +23,7 @@ class Keyboard extends Component {
 
 // Keyboard container
 
-const mapStateToProps = ({ overlay, synth }) => ({ overlay, synth })
+const mapStateToProps = ({ keyboard: { overlay, synth } }) => ({ overlay, synth })
 
 export default connect(
   mapStateToProps,

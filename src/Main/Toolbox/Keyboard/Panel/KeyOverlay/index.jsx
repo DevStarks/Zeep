@@ -38,9 +38,7 @@ class KeyOverlay extends Component {
 
 // Keyboard container
 
-const mapStateToProps = ({ overlay }) => {
-	return { overlay }
-}
+const mapStateToProps = ({ keyboard: { overlay } }) => ({ overlay })
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators(actions, dispatch)

@@ -33,7 +33,7 @@ const Transpose = function({ pitchOffset, incrementKey, decrementKey }) {
 
 // Transpose container
 
-const mapStateToProps = ({ pitchOffset }) => ({ pitchOffset })
+const mapStateToProps = ({ keyboard: { pitchOffset } }) => ({ pitchOffset })
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 

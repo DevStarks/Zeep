@@ -1,3 +1,9 @@
-import keyboardReducer from './Keyboard/reducer'
+import { combineReducers } from 'redux'
 
-export default keyboardReducer;
+import keyboardReducer from './Keyboard/reducer'
+import metronomeReducer from './Metronome/reducer'
+
+export default combineReducers({
+  metronome: metronomeReducer,
+  keyboard:  keyboardReducer
+})

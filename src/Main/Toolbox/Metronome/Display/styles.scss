@@ -1,0 +1,33 @@
+@import "./src/styles/base";
+
+:local(.Display) {
+  background-color:#fff;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  border-radius: $border-radius;
+
+  .beat {
+    width: 2rem;
+    height: 1rem;
+    border-radius: $border-radius;
+    border: 1px solid $color-background-medium;
+    margin-right: 1rem;
+
+    &.active {
+      background-color: $color-rose-gold;
+    }
+
+    &.accented {
+      background-color: $color-rose-gold;
+
+      &.active {
+        background-color:darken($color-rose-gold, 10%);
+      }
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
