@@ -4,13 +4,15 @@ import { connect } from 'react-redux'
 import styles from './styles.scss';
 
 import Display from './Display';
+import Panel from './Panel';
 
 
 class Metronome extends Component {
 	render() {
 		return (
 			<div styleName='Metronome'>
-        <Display meter={this.props.meter} transport={this.props.transport} />
+        <Display {...this.props} />
+				<Panel />
 			</div>
 		);
 	}
@@ -18,7 +20,7 @@ class Metronome extends Component {
 
 // Metronome container
 
-const mapStateToProps = ({ metronome: { meter, transport } }) => ({ meter, transport })
+const mapStateToProps = ({ metronome: { meter, transport, tempo } }) => ({ meter, transport, tempo })
 
 export default connect(
   mapStateToProps,

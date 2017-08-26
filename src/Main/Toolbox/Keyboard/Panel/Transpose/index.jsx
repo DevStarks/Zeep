@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actions } from '../../../Keyboard/reducer'
 
-import Adjuster from '../components/adjuster'
+import Adjuster from '../../../components/adjuster'
 
 const CHR_SCALE = ["C", "C#", "D", "D#", "E", "F",
                    "F#", "G", "G#", "A", "A#", "B"];

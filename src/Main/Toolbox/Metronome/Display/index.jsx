@@ -1,19 +1,19 @@
-import React, { Component, PropTypes } from 'react';
-import CSSModules from 'react-css-modules';
-import styles from './styles.scss';
+import React, { Component, PropTypes } from 'react'
+import CSSModules from 'react-css-modules'
+import styles from './styles.scss'
 
-import Beat from './Beat';
+import Beat from './Beat'
 
 class Display extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    window.transport = this.props.transport;
+    window.transport = this.props.transport
 
-    this.renderBeat = this.renderBeat.bind(this);
-    this.renderBeats = this.renderBeats.bind(this);
-    this.getCurrentQuarterNote = this.getCurrentQuarterNote.bind(this);
-    this.tick = this.tick.bind(this);
+    this.renderBeat = this.renderBeat.bind(this)
+    this.renderBeats = this.renderBeats.bind(this)
+    this.getCurrentQuarterNote = this.getCurrentQuarterNote.bind(this)
+    this.tick = this.tick.bind(this)
 
     this.state = {
       activeBeat: this.getCurrentQuarterNote()
@@ -21,7 +21,18 @@ class Display extends Component {
   }
 
   componentDidMount() {
-    this.props.transport.scheduleRepeat(this.tick, '4n')
+    this.resetTickEventListener()
+  }
+
+  componentDidUpdate(oldProps) {
+    if(oldProps.tempo !== this.props.tempo){
+      this.resetTickEventListener()
+    }
+  }
+
+  resetTickEventListener() {
+    this.props.transport.clear(this._tickEvent)
+    this._tickEvent = this.props.transport.scheduleRepeat(this.tick, '4n')
   }
 
   tick() {
@@ -31,21 +42,21 @@ class Display extends Component {
   }
 
   getCurrentQuarterNote() {
-    return Number(this.props.transport.position.split(':')[1]);
+    return Number(this.props.transport.position.split(':')[1])
   }
 
   beatActive(pos) {
-    return this.state.activeBeat === pos && this.props.transport.state === 'started';
+    return this.state.activeBeat === pos && this.props.transport.state === 'started'
   }
 
   renderBeat(_, pos) {
     return <Beat key={pos}
                  position={pos}
-                 active={this.beatActive(pos)} />;
+                 active={this.beatActive(pos)} />
   }
 
   renderBeats() {
-    return Array(this.props.meter).fill('').map(this.renderBeat);
+    return Array(this.props.meter).fill('').map(this.renderBeat)
   }
 
 	render() {
@@ -53,7 +64,7 @@ class Display extends Component {
 			<div styleName='Display'>
         {this.renderBeats()}
 			</div>
-		);
+		)
 	}
 }
 
@@ -63,4 +74,4 @@ Display.propTypes = {
 }
 
 
-export default CSSModules(Display, styles);
+export default CSSModules(Display, styles)
